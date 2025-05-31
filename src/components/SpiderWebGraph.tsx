@@ -161,8 +161,8 @@ const SpiderWebGraph: React.FC<SpiderWebGraphProps> = ({ data }) => {
     // Add circles to nodes
     node.append('circle')
       .attr('r', (d: Node) => d.size / 2)
-      .attr('fill', '#DC2626')
-      .attr('stroke', '#B91C1C')
+      .attr('fill', 'rgba(220,38,38,0.52)')
+      .attr('stroke', '#961313')
       .attr('stroke-width', 2);
 
     // Add labels to nodes

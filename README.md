@@ -1,46 +1,98 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Spider.eddit React UI
 
-## Available Scripts
+This is the frontend interface for the Spider.eddit project — a word relationship graph visualizer based on Reddit comment histories. The app allows users to submit a Reddit thread URL and displays a dynamic, interactive word co-occurrence network graph based on user content.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- Clean, single-page UI built with React
+- Form to input a Reddit thread URL
+- Sends POST request to Spider.eddit backend API
+- Receives and renders word graph JSON data
+- Interactive D3 or Recharts-based visualization (customizable)
+- Responsive layout and simple UX for quick interaction
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Tech Stack
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- React 18
+- Axios (API requests)
+- D3.js or Recharts (Graph rendering)
+- Tailwind CSS (Styling)
+- Vite or Create React App (bundler/dev server)
 
-### `npm test`
+## Folder Structure
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+spidereddit-ui/
+├── public/
+├── src/
+│   ├── components/
+│   │   └── SpiderWebGraph.jsx
+│   ├── App.jsx
+│   ├── index.js
+│   └── api.js
+├── package.json
+```
 
-### `npm run build`
+## Setup Instructions
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Clone the repository:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+git clone https://github.com/yourusername/spidereddit-ui.git
+cd spidereddit-ui
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. Install dependencies:
 
-### `npm run eject`
+```bash
+npm install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+3. Run the development server:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+npm run dev
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+4. The app will be available at `http://localhost:3000`
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## API Integration
 
-## Learn More
+- The frontend sends a `POST` request to `/crawl` endpoint of the backend with the following payload:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```json
+{
+  "url": "https://www.reddit.com/r/example/comments/threadid/example_title/",
+  "token": "your_oauth_token"
+}
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Expects a JSON response with:
+
+```json
+{
+  "nodes": [{ "id": "word", "value": 15 }],
+  "links": [{ "source": "word1", "target": "word2", "value": 3 }]
+}
+```
+
+## Deployment
+
+Build the static files for production with:
+
+```bash
+npm run build
+```
+
+Then serve with:
+
+```bash
+npm run preview
+```
+
+Or deploy to platforms like Vercel, Netlify, or S3/CloudFront.
+
+## License
+
+This project is licensed under the MIT License.
